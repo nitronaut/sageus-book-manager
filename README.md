@@ -42,3 +42,38 @@ Yes. Paste them exactly as your retailer gives them; they are stored verbatim.
 * FIX: Retailer & Purchase Links — repeater now uses a <template>, reindexes correctly, save no longer wipes links on autosave/quick-edit/REST, retailers page JS fixed.
 * NEW: Details box on book pages + admin sidebar showing Published / Genres / Tags.
 * FIX: Books/Grids use Classic Editor so meta boxes save reliably.
+=======================================================
+
+Done — v1.0.3:
+
+**Download Sageus Book Manager v1.0.3 (.zip)**
+
+### a] DETAILS moved above “Available at”
+
+Order on the single book page is now:
+
+1. Title / Author / Tagline
+2. Meta list
+3. **Details** — Published / Genres / Tags / ISBN / Publisher
+4. **Available at** — retailer tiles
+5. About / Excerpt / Reviews
+
+Verified in the template: Details renders before `sageus_render_buy_buttons()`.
+
+### b] “Available at” → horizontal tiles, 4 across, large retailer images
+
+- **Layout:** CSS grid `repeat(4, minmax(0,1fr))` — max 4 across on desktop, 2 across on tablet/mobile, 2 across in the sidebar widget (compact mode)
+- **Tile design:** White card, retailer-colour top border, centered:
+  - **Large logo on top** — your Retailer Image URL, up to `100% wide × 72px tall`, `object-fit: contain` so logos aren't squashed. Previously it was a tiny 20px icon.
+  - Retailer name underneath in bold
+  - Custom label / format (e.g. “Paperback”) as a small subtitle — it no longer replaces the retailer name
+  - “Buy →” CTA in the retailer colour
+  - Hover lift + shadow
+- **No logo?** Falls back to a large coloured tile with the retailer's initials in the retailer colour, same size — so the grid still looks even.
+
+> To get the large logos: **Books → Retailers** → paste a logo URL in the **Button Image URL** column for each retailer → Save Retailers. Use a wide, transparent PNG if you have it (e.g. 600×200) — it will scale down cleanly. Logos already there will now just show much bigger.
+
+### Install
+Deactivate + delete old version (books are safe), then Plugins → Add New → Upload Plugin → v1.0.3 zip → Activate. Hard-refresh the book page once (`Ctrl+Shift+R`) so the new CSS loads.
+
+Want the tiles to also show a price / format badge, or should the 5th+ retailer wrap to a second row of 4 (current behaviour) vs. staying on one scrollable row?
